@@ -1,8 +1,12 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import { createWrapper } from "next-redux-wrapper";
+import WheatherSlice from './reducesrs/WheatherSlice';
+import GeoSlice from './reducesrs/GeoSlice';
 
 
 const rootReduser = combineReducers({
+	WheatherSlice,
+	GeoSlice,
 })
 
 export const setupSore = () => {
