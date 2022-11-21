@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { ICords, IGeo, IWheather } from '../../types';
+import { IGeo, IWheather } from '../../types';
 import { AppDistpatch } from '../store';
 import {GeoSlice} from './GeoSlice';
 
@@ -19,9 +19,9 @@ import {GeoSlice} from './GeoSlice';
 
 export const fetchWheather = createAsyncThunk(
 	'posts/fetchAll',
-	async(cords: ICords, thunkApi) => {
+	async(cords: string[], thunkApi) => {
 		try {
-			const res = await axios.get<IWheather>(`https://api.openweathermap.org/data/2.5/weather?lat=${cords.lat}&lon=${cords.lon}&appid=afb5a84dbc5cfae2c5927433a8fbfd83`)
+			const res = await axios.get<IWheather>(`https://api.openweathermap.org/data/2.5/weather?lat=${cords[0]}&lon=${cords[1]}&appid=afb5a84dbc5cfae2c5927433a8fbfd83`)
 			return res.data
 		} catch (er: any) {
 			return thunkApi.rejectWithValue(er.message)

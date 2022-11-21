@@ -21,8 +21,3 @@ export interface IGeo{
 	value: string;
 	label: string;
 }
-
-export interface ICords{
-	lat: number,
-	lon: number
-}

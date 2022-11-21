@@ -10,10 +10,10 @@ interface GeoState {
 }
 
 const initialState: GeoState = { 
-	geo: [{value: `===`  , label:  `Almaty`},{value: `===`  , label:  `Astana`},],
+	geo: [{value: `43.238949 76.889709`  , label:  `Almaty`},{value: `51.169392 71.449074`  , label:  `Astana`}],
 	isLoading: false,
 	error: '',
-	chosen: {value: `===`  , label:  `Almaty`}		
+	chosen: {value: `43.238949 76.889709`  , label:  `Almaty`}		
 }
 
 export const GeoSlice = createSlice({
@@ -37,7 +37,7 @@ export const GeoSlice = createSlice({
 		},
 		geoChoose(state, action: PayloadAction<IGeo>){
 			state.chosen = action.payload
-		}
+		},
 	}
 })
 

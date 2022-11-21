@@ -19,20 +19,19 @@ export const WheatherSlice = createSlice({
 	name: "Wheather",
 	initialState,
 	reducers: {
+		weatherAdd(state, action: PayloadAction<IWheather>){
+			state.isLoading = false
+			state.weather = [action.payload,...state.weather]
+			state.error = ''
+
+
+		},
 	},
 	extraReducers: {
 		[fetchWheather.fulfilled.type]:(state, action: PayloadAction<IWheather>) => {
 			state.isLoading = false
-			if(JSON.stringify(state.weather) != '[]'){
-				state.weather.forEach(el => {
-					JSON.stringify(el) != JSON.stringify(action.payload) ? state.weather.push(action.payload)
-					 : state.weather = state.weather;
-				})
-			}else{
-				state.weather.push(action.payload)
-			}
-			
-			
+			state.weather = state.weather.filter(el => el.id != action.payload.id)
+			state.weather.push(action.payload)
 			state.error = ''
 
 

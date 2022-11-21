@@ -1,25 +1,24 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.sass'
 import { wrapper } from '../store/store';
-import axios from 'axios';
 import Wheather from '../components/Wheather';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { fetchWheather } from '../store/reducesrs/ActionCreators';
 import { NextPage } from 'next';
 import { IWheather } from '../types';
+import Geo from '../components/Geo';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 
 interface HomeItemProps{
-	weatherOne: IWheather[];
+	weather: IWheather[];
 }
 
 export const getStaticProps = wrapper.getStaticProps(
 	(store) =>
 	  async ({ params }) => {
-		await store.dispatch(fetchWheather({lat: 53.551086, lon: 9.993682})); 
+		await store.dispatch(fetchWheather(store.getState().GeoSlice.chosen.value.split(' '))); 
 		return {
 		  props: {
-			weatherOne: store.getState().WheatherSlice.weather
+			weather: store.getState().WheatherSlice.weather
 		  }
 		};
 	  }
@@ -27,10 +26,17 @@ export const getStaticProps = wrapper.getStaticProps(
 
 
   
-const Home : NextPage<HomeItemProps> = ({weatherOne}) => {
+const Home : NextPage<HomeItemProps> = ({weather}) => {
+	const {chosen} = useAppSelector(state => state.GeoSlice)
+	const dispatch = useAppDispatch()
+	useEffect(()=>{
+		dispatch(fetchWheather(chosen.value.split(' ')))
+	},[])
+
   return (
     <div className={styles.container}>
-		<Wheather weather={weatherOne}/>
+		<Geo/>
+		<Wheather weatherO={weather}/>
     </div>
   )
 }
