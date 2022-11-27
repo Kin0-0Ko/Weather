@@ -7,6 +7,7 @@ import { IWheather } from '../types';
 import Geo from '../components/Geo';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import {WheatherSlice} from '../store/reducesrs/WheatherSlice';
 
 interface HomeItemProps{
 	weather: IWheather[];
@@ -30,7 +31,7 @@ const Home : NextPage<HomeItemProps> = ({weather}) => {
 	const {chosen} = useAppSelector(state => state.GeoSlice)
 	const dispatch = useAppDispatch()
 	useEffect(()=>{
-		dispatch(fetchWheather(chosen.value.split(' ')))
+		dispatch(WheatherSlice.actions.weatherAdd(weather))
 	},[])
 
   return (

@@ -19,10 +19,9 @@ export const WheatherSlice = createSlice({
 	name: "Wheather",
 	initialState,
 	reducers: {
-		weatherAdd(state, action: PayloadAction<IWheather>){
+		weatherAdd(state, action: PayloadAction<IWheather[]>){
 			state.isLoading = false
-			state.weather = [action.payload,...state.weather]
-			state.error = ''
+			state.weather = action.payload
 
 
 		},
@@ -31,7 +30,7 @@ export const WheatherSlice = createSlice({
 		[fetchWheather.fulfilled.type]:(state, action: PayloadAction<IWheather>) => {
 			state.isLoading = false
 			state.weather = state.weather.filter(el => el.id != action.payload.id)
-			state.weather.push(action.payload)
+			state.weather.unshift(action.payload)
 			state.error = ''
 
 

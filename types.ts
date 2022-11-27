@@ -8,12 +8,26 @@ export interface IWheather {
 	coord: {};
 	dt: number;
 	id: number;
-	main: {};
+	main: {
+		feels_like: number,
+		humidity: number,
+		pressure: number,
+		temp: number,
+		temp_max: number,
+		temp_min: number
+	};
 	name: string;
 	sys: {};
 	timezone: number;
 	visability: number;
-	wheather: [{}];
+	weather: [
+		{
+		  id: number,
+		  main: string,
+		  description: string,
+		  icon: string
+		}
+	  ];
 	wind: {};
 }
 

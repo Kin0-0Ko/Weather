@@ -21,7 +21,7 @@ export const fetchWheather = createAsyncThunk(
 	'posts/fetchAll',
 	async(cords: string[], thunkApi) => {
 		try {
-			const res = await axios.get<IWheather>(`https://api.openweathermap.org/data/2.5/weather?lat=${cords[0]}&lon=${cords[1]}&appid=afb5a84dbc5cfae2c5927433a8fbfd83`)
+			const res = await axios.get<IWheather>(`https://api.openweathermap.org/data/2.5/weather?lat=${cords[0]}&lon=${cords[1]}&appid=afb5a84dbc5cfae2c5927433a8fbfd83&units=metric`)
 			return res.data
 		} catch (er: any) {
 			return thunkApi.rejectWithValue(er.message)
