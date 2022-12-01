@@ -5,7 +5,10 @@ export interface IWheather {
 	base: string;
 	clouds: {};
 	cod: number;
-	coord: {};
+	coord: {
+		lat: number,
+		lon: number
+	};
 	dt: number;
 	id: number;
 	main: {
@@ -28,7 +31,11 @@ export interface IWheather {
 		  icon: string
 		}
 	  ];
-	wind: {};
+	wind: {
+		speed: number,
+		deg: number,
+		gust: number
+	};
 }
 
 export interface IGeo{

@@ -3,17 +3,17 @@ import { IGeo } from '../../types';
 // import { fetchPosts } from './AcrionCreators';
 
 interface GeoState {
-	geo: IGeo[];
+	geo: IGeo;
 	isLoading: boolean;
 	error: string;
 	chosen: IGeo	
 }
 
 const initialState: GeoState = { 
-	geo: [{value: `43.238949 76.889709`  , label:  `Almaty`},{value: `51.169392 71.449074`  , label:  `Astana`}],
+	geo: {value: `43.25 76.95`  , label:  `Almaty`},
 	isLoading: false,
 	error: '',
-	chosen: {value: `43.238949 76.889709`  , label:  `Almaty`}		
+	chosen: {value: `43.25 76.95`  , label:  `Almaty`}		
 }
 
 export const GeoSlice = createSlice({
@@ -23,7 +23,7 @@ export const GeoSlice = createSlice({
 		geoFetcching(state){
 			state.isLoading = true
 		},
-		geoFetchingSuccess(state, action: PayloadAction<IGeo[]>){
+		geoFetchingSuccess(state, action: PayloadAction<IGeo>){
 			state.isLoading = false
 			state.geo = action.payload
 			state.error = ''

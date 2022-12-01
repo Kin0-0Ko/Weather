@@ -9,22 +9,20 @@ const Geo : FC = () => {
 	const {error, geo, isLoading} = useAppSelector(state => state.GeoSlice)
 	const dispatch = useAppDispatch();
 	useEffect(() => {
-		if(val == "Almaty" || val == "Astana"){
-			dispatch(GeoSlice.actions.geoFetchingSuccess([{value: `43.238949 76.889709`  , label:  `Almaty`},{value: `51.169392 71.449074`  , label:  `Astana`},]))
-		}
+		// if(val == "Almaty" || val == "Astana"){
+		// 	dispatch(GeoSlice.actions.geoFetchingSuccess([{value: `43.238949 76.889709`  , label:  `Almaty`},{value: `51.169392 71.449074`  , label:  `Astana`},]))
+		// }dispatch(GeoSlice.actions.geoChoose(geo))}
 	
 	}, [val])
 
-  return <div className={st.GeoContainer}>
-	<input  value={val} onChange={(e) => {setVal(e.target.value); dispatch(fetchGeo(val))}}/>
-	<div>
-		<ul>
-		{geo.map((city) => 
-				<li onClick={() => dispatch(GeoSlice.actions.geoChoose(city))} key={city.value}>{city.label}</li>)
-		}
-		</ul>
+	return <div className={st.container}>
+	<div className={st.d1}>
+	  <form>
+	  <input  value={val} onChange={(e) => {setVal(e.target.value) }}/>
+	  <button type='button' onClick={() => {dispatch(fetchGeo(val)); dispatch(GeoSlice.actions.geoChoose(geo))}}>Search</button>
+	  </form>
 	</div>
-  </div>
+	</div>
 }	
 
 export default Geo;
